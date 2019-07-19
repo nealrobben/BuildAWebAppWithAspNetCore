@@ -3,23 +3,22 @@
 <head>
     <title>Dutch Treat</title>
     <link href="css/site.css" rel="stylesheet"/>
-    <script src="js/index.js"></script>
 </head>
 <body>
 <h2>Dutch Treat</h2>
-<div>
+<div class="product-info">
     <img src="img/VanGogh.jpg"/>
     <h3>Mug</h3>
-    <ul>
+    <ul class="product-props">
         <li>Price: $9.99</li>
         <li>Artist: Van Gogh</li>
         <li>Title: </li>
         <li>Description: Self-portrait</li>
     </ul>
-    <button>Buy</button>
+    <button id="buyButton">Buy</button>
 </div>
 
-<form>
+<form id="theForm">
     <label>Your name:</label>
     <br />
     <input />
@@ -38,6 +37,7 @@
     <br/>
     <input type="submit" value="Send message"/>
 </form>
-
+    
+<script src="js/index.js"></script>
 </body>
 </html>
