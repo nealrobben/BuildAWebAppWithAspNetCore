@@ -5,21 +5,23 @@
 }
 
 <form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+
     <label asp-for="Name">Your name:</label>
-    <br />
-    <input asp-for="Name" />
-    <br />
+    <br/>
+    <input asp-for="Name"/>
+    <br/>
     <label asp-for="Email">Email:</label>
-    <br />
-    <input asp-for="Email" type="email" />
-    <br />
+    <br/>
+    <input asp-for="Email" type="email"/>
+    <br/>
     <label asp-for="Subject">Subject:</label>
-    <br />
-    <input asp-for="Subject" />
-    <br />
+    <br/>
+    <input asp-for="Subject"/>
+    <br/>
     <label asp-for="Message">Message:</label>
-    <br />
+    <br/>
     <textarea asp-for="Message" rows="4"></textarea>
-    <br />
-    <input type="submit" value="Send Message" />
+    <br/>
+    <input type="submit" value="Send Message"/>
 </form>

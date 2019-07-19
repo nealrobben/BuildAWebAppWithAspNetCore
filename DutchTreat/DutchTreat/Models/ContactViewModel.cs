@@ -16,7 +16,7 @@ namespace DutchTreat.Models
         public string Subject { get; set; }
 
         [Required]
-        [MaxLength(250,ErrorMessage = "Maximum 250 characters")]
+        [MaxLength(250,ErrorMessage = "Too long")]
         public string Message { get; set; }
     }
 }
