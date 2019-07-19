@@ -31,10 +31,8 @@ namespace DutchTreat.Controllers
             {
                 //Send mail
                 _mailService.SendMessage("admin@site.com",model.Subject,model.Message);
-            }
-            else
-            {
-                //Show error
+                ViewBag.UserMessage = "Mail sent";
+                ModelState.Clear();
             }
 
             return View();
