@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DutchTreat
@@ -18,6 +17,7 @@ namespace DutchTreat
         {
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseNodeModules(env);
         }
     }
 }
