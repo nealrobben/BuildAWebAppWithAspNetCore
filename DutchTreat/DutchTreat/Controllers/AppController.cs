@@ -8,5 +8,19 @@ namespace DutchTreat.Controllers
         {
             return View();
         }
+
+        public IActionResult Contact()
+        {
+            ViewBag.Title = "Contact";
+
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            ViewBag.Title = "About";
+
+            return View();
+        }
     }
 }
