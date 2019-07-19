@@ -1,7 +1,13 @@
-﻿@model ContactViewModel
+﻿@using Microsoft.AspNetCore.Identity.UI.V3.Pages.Internal
+@model ContactViewModel
 
 @{
     ViewBag.Title = "Contact";
+}
+
+@section Scripts{
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
 }
 
 <form method="post">
