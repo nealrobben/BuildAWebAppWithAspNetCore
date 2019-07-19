@@ -1,10 +1,18 @@
 ﻿using DutchTreat.Models;
+using DutchTreat.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DutchTreat.Controllers
 {
     public class AppController : Controller
     {
+        private readonly IMail _mailService;
+
+        public AppController(IMail mailService)
+        {
+            _mailService = mailService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -22,6 +30,7 @@ namespace DutchTreat.Controllers
             if (ModelState.IsValid)
             {
                 //Send mail
+                _mailService.SendMessage("admin@site.com",model.Subject,model.Message);
             }
             else
             {
