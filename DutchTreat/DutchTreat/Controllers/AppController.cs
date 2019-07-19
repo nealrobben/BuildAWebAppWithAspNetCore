@@ -9,6 +9,7 @@ namespace DutchTreat.Controllers
             return View();
         }
 
+        [HttpGet("/contact")]
         public IActionResult Contact()
         {
             ViewBag.Title = "Contact";

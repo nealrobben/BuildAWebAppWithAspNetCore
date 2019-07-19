@@ -8,7 +8,16 @@
 </head>
 <body>
     <div>
-        <header>Welcome to Dutch Treat</header>
+        <header>
+            <h1>Welcome to Dutch Treat</h1>
+            <menu>
+                <ul>
+                    <li><a asp-controller="App" asp-action="Index">Home</a></li>
+                    <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
+                    <li><a asp-controller="App" asp-action="About">About</a></li>
+                </ul>
+            </menu>
+        </header>
         <section>
             <h2>@ViewBag.Title</h2>
             @RenderBody()
