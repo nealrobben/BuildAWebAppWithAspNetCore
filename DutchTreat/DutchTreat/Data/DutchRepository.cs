@@ -12,7 +12,7 @@ namespace DutchTreat.Data
         IEnumerable<Product> GetAllProducts();
         IEnumerable<Product> GetProductsByCategory(string category);
 
-        IEnumerable<Order> GetAllOrders();
+        IEnumerable<Order> GetAllOrders(bool includeItems);
         Order GetOrderById(int id);
 
         bool SaveAll();
@@ -60,14 +60,22 @@ namespace DutchTreat.Data
             _ctx.Add(model);
         }
 
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<Order> GetAllOrders(bool includeItems)
         {
             try
             {
                 _logger.LogInformation("GetAllOrders called");
 
-                return _ctx.Orders.Include(x => x.Items).ThenInclude(x => x.Product).OrderBy(x => x.OrderNumber)
-                    .ToList();
+                if (includeItems)
+                {
+                    return _ctx.Orders.Include(x => x.Items).ThenInclude(x => x.Product).OrderBy(x => x.OrderNumber)
+                        .ToList();
+                }
+                else
+                {
+                    return _ctx.Orders.OrderBy(x => x.OrderNumber)
+                        .ToList();
+                }
             }
             catch (Exception e)
             {
