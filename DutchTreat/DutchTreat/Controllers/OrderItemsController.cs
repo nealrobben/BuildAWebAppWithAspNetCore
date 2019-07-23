@@ -42,7 +42,7 @@ namespace DutchTreat.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int orderId, int id)
         {
-            var order = _repository.GetOrderById(orderId);
+            var order = _repository.GetOrderById(User.Identity.Name, id);
 
             var item = order?.Items.FirstOrDefault(i => i.Id == id);
 
