@@ -16,6 +16,7 @@ namespace DutchTreat.Data
         Order GetOrderById(int id);
 
         bool SaveAll();
+        void AddEntity(object model);
     }
 
     public class DutchRepository : IDutchRepository
@@ -52,6 +53,11 @@ namespace DutchTreat.Data
         public bool SaveAll()
         {
             return _ctx.SaveChanges() > 0;
+        }
+
+        public void AddEntity(object model)
+        {
+            _ctx.Add(model);
         }
 
         public IEnumerable<Order> GetAllOrders()
