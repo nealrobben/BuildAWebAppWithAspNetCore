@@ -38,6 +38,8 @@ namespace DutchTreat
 
             services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+
+            //services.AddIdentity<>()
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
