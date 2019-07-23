@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DutchTreat.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace DutchTreat.Data
@@ -10,6 +11,10 @@ namespace DutchTreat.Data
     {
         IEnumerable<Product> GetAllProducts();
         IEnumerable<Product> GetProductsByCategory(string category);
+
+        IEnumerable<Order> GetAllOrders();
+        Order GetOrderById(int id);
+
         bool SaveAll();
     }
 
@@ -47,6 +52,38 @@ namespace DutchTreat.Data
         public bool SaveAll()
         {
             return _ctx.SaveChanges() > 0;
+        }
+
+        public IEnumerable<Order> GetAllOrders()
+        {
+            try
+            {
+                _logger.LogInformation("GetAllOrders called");
+
+                return _ctx.Orders.Include(x => x.Items).ThenInclude(x => x.Product).OrderBy(x => x.OrderNumber)
+                    .ToList();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Faied to get all orders: {e}");
+                return null;
+            }
+        }
+
+        public Order GetOrderById(int id)
+        {
+            try
+            {
+                _logger.LogInformation("GetAllOrders called");
+
+                return _ctx.Orders.Where(x => x.Id == id).Include(x => x.Items).ThenInclude(x => x.Product)
+                    .FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Faied to get all orders: {e}");
+                return null;
+            }
         }
     }
 }
