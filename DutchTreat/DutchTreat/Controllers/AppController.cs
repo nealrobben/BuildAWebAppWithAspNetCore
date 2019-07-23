@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using DutchTreat.Data;
+﻿using DutchTreat.Data;
 using DutchTreat.Models;
 using DutchTreat.Services;
 using Microsoft.AspNetCore.Authorization;

@@ -2,11 +2,15 @@
   "ConnectionStrings": {
     "DutchConnectionString": "Server=(localdb)\\MSSQLLocalDB;Database=DutchTreatDb;Trusted_Connection=True;MultipleActiveResultSets=true"
   },
-  "Logging":
-  {
+  "Logging": {
     "LogLevel": {
       "Default": "Information",
-      "Microsoft":  "Warning" 
-    } 
-  }
+      "Microsoft": "Warning"
+    }
+  },
+  "Tokens": {
+    "Key": "sdfifdiosdfiosdfjisdioioddiosdfzenozefn",
+    "Issuer": "localhost",
+    "Audience": "users" 
+  } 
 }
