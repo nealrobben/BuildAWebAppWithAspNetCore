@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using DutchTreat.Data;
 using DutchTreat.Data.Entities;
 using DutchTreat.Models;
@@ -12,11 +14,13 @@ namespace DutchTreat.Controllers
     {
         private readonly IDutchRepository _repository;
         private readonly ILogger<ProductController> _logger;
+        private readonly IMapper _mapper;
 
-        public OrderController(IDutchRepository repository, ILogger<ProductController> logger)
+        public OrderController(IDutchRepository repository, ILogger<ProductController> logger, IMapper mapper)
         {
             _repository = repository;
             _logger = logger;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -24,7 +28,7 @@ namespace DutchTreat.Controllers
         {
             try
             {
-                return Ok(_repository.GetAllOrders());
+                return Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(_repository.GetAllOrders()));
             }
             catch (Exception e)
             {
@@ -41,7 +45,7 @@ namespace DutchTreat.Controllers
                 var order = _repository.GetOrderById(id);
 
                 if (order != null)
-                    return Ok(order);
+                    return Ok(_mapper.Map<Order,OrderViewModel>(order));
 
                 return NotFound();
             }
@@ -59,12 +63,7 @@ namespace DutchTreat.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var newOrder = new Order
-                    {
-                        OrderDate = model.OrderDate,
-                        OrderNumber = model.OrderNumber,
-                        Id = model.OrderId
-                    };
+                    var newOrder = _mapper.Map<OrderViewModel, Order>(model);
 
                     if (newOrder.OrderDate == DateTime.MinValue)
                         newOrder.OrderDate = DateTime.Now;
@@ -73,12 +72,7 @@ namespace DutchTreat.Controllers
 
                     if (_repository.SaveAll())
                     {
-                        var vm = new OrderViewModel
-                        {
-                            OrderId = newOrder.Id,
-                            OrderDate = newOrder.OrderDate,
-                            OrderNumber = newOrder.OrderNumber
-                        };
+                        var vm = _mapper.Map<Order, OrderViewModel>(newOrder);
 
                         return Created($"/api/orders/{vm.OrderId}", vm);
                     }
