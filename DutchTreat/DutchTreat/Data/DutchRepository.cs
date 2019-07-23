@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using DutchTreat.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -13,7 +14,8 @@ namespace DutchTreat.Data
         IEnumerable<Product> GetProductsByCategory(string category);
 
         IEnumerable<Order> GetAllOrders(bool includeItems);
-        Order GetOrderById(int id);
+        IEnumerable<Order> GetAllOrdersByUser(string userName, bool includeItems);
+        Order GetOrderById(string userName, int id);
 
         bool SaveAll();
         void AddEntity(object model);
@@ -84,13 +86,39 @@ namespace DutchTreat.Data
             }
         }
 
-        public Order GetOrderById(int id)
+        public IEnumerable<Order> GetAllOrdersByUser(string userName, bool includeItems)
         {
             try
             {
                 _logger.LogInformation("GetAllOrders called");
 
-                return _ctx.Orders.Where(x => x.Id == id).Include(x => x.Items).ThenInclude(x => x.Product)
+                if (includeItems)
+                {
+                    return _ctx.Orders.Where(x => x.User.UserName == userName).Include(x => x.Items)
+                        .ThenInclude(x => x.Product).OrderBy(x => x.OrderNumber)
+                        .ToList();
+                }
+                else
+                {
+                    return _ctx.Orders.OrderBy(x => x.OrderNumber)
+                        .ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError($"Faied to get all orders: {e}");
+                return null;
+            }
+        }
+
+        public Order GetOrderById(string userName, int id)
+        {
+            try
+            {
+                _logger.LogInformation("GetAllOrders called");
+
+                return _ctx.Orders.Where(x => x.Id == id && x.User.UserName == userName).Include(x => x.Items)
+                    .ThenInclude(x => x.Product)
                     .FirstOrDefault();
             }
             catch (Exception e)
