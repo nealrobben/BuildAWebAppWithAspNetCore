@@ -10,7 +10,7 @@
                 <li>Title: {{ p.title }}</li>
                 <li>Description: {{ p.artDescription }}</li>
             </ul>
-            <button id="buyButton">Buy</button>
+            <button id="buyButton" (click)="addProduct(p)" >Buy</button>
         </div>
     </div>
 
