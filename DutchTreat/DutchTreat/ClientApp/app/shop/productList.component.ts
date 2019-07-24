@@ -1,10 +1,13 @@
 ﻿import { Component } from "@angular/core";
 import { DataService } from "../shared/dataService";
+import { Observable } from "rxjs";
+import { Product } from "../shared/product";
+
 
 @Component({
     selector: "product-list",
     templateUrl: "productlist.component.html",
-    styleUrls: []
+    styleUrls: ["productList.component.css"]
 })
 export class ProductList implements OnInit {
 
@@ -12,7 +15,7 @@ export class ProductList implements OnInit {
         this.products = data.products;
     }
 
-    public products = [];
+    public products: Product[] = [];
 
     ngOnInit(): void {
         this.data.loadProducts().subscribe(success => {
