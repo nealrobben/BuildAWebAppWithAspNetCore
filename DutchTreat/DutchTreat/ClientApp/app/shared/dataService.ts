@@ -32,6 +32,15 @@ export class DataService {
         return this.token.length == 0 || this.tokenExpiration > new Date();
     }
 
+    login(creds): Observable<boolean> {
+        return this.http.post("/account/createtoken", creds)
+            .map((data: any) => {
+                this.token = data.token;
+                this.tokenExpiration = data.expiration;
+                return true;
+            });
+    }
+
     public addToOrder(product: Product) {
 
         let item: OrderItem = this.order.items.find(i => i.productId == product.id);
