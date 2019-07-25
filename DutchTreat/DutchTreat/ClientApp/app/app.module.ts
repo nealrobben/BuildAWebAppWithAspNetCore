@@ -8,6 +8,7 @@ import { Cart } from "./shop/cart.component";
 import { DataService } from "./shared/dataService";
 
 import { RouterModule } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 import { Shop } from "./shop/shop.component";
 import { Checkout } from "./checkout/checkout.component";
 import { Login } from "./login/login.component";
@@ -31,6 +32,7 @@ NgModule({
     imports: [
         BrowserModule,
         HttpClientModule,
+        FormsModule,
         RouterModule.forRoot(routes,
             {
                 useHash: true,
